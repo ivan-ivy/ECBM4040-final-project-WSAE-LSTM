@@ -1,0 +1,27 @@
+#################
+#Temporary files#
+#################
+*.swp
+*.pyc
+*.png
+.DS_Store
+
+###############
+# Data  files #
+###############
+data/*
+
+
+###############
+# Other files #
+###############
+.ipynb_checkpoints/*
+ref/*
+__pycache__/*
+.idea/*
+.vscode/*
+
+###################
+# Tensorflow data #
+###################
+*.data-00000-of-00001

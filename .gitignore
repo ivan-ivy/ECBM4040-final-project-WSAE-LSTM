@@ -15,7 +15,7 @@ data/*
 ###############
 # Other files #
 ###############
-.ipynb_checkpoints/*
+notebooks/.ipynb_checkpoints/*
 ref/*
 __pycache__/*
 .idea/*
@@ -25,3 +25,4 @@ __pycache__/*
 # Tensorflow data #
 ###################
 *.data-00000-of-00001
+

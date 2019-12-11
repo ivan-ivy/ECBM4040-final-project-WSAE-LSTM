@@ -7,6 +7,7 @@ NUM_TRAIN = 24
 NUM_VAL = 3
 NUM_TEST = 3
 
+FEATURE_DIR = os.path.abspath(os.path.join(os.path.realpath(__file__), "../../../data/intertim"))
 
 def generate_features(raw: pd.DataFrame, sheet_name):
     month_lst = list(set(raw.Ntime // 100))
@@ -22,18 +23,18 @@ def generate_features(raw: pd.DataFrame, sheet_name):
     for month in month_lst:
         index_dict[month] = raw[raw.Ntime // 100 == month].index.to_list()
 
-    save_dir = f'../data/interim/{sheet_name}'
+    save_dir = FEATURE_DIR + f'/{sheet_name}'
     if not os.path.exists(save_dir):
-        os.mkdir(save_dir)
+        os.makedirs(save_dir)
 
     for i in range(0, len(month_lst) - NUM_TRAIN - NUM_VAL - NUM_TEST + 3, 3):
         train_ind = get_index(month_lst[i:i + NUM_TRAIN])
         val_ind = get_index(month_lst[i + NUM_TRAIN:i + NUM_TRAIN + NUM_VAL])
         test_index = get_index(month_lst[i + NUM_TRAIN + NUM_VAL:i + NUM_TRAIN + NUM_VAL + NUM_TEST])
 
-        save_dir = f'../data/interim/{sheet_name}/{month_lst[i + NUM_TRAIN + NUM_VAL]}'
+        save_dir = FEATURE_DIR + f'/{sheet_name}/{month_lst[i + NUM_TRAIN + NUM_VAL]}'
         if not os.path.exists(save_dir):
-            os.mkdir(save_dir)
+            os.makedirs(save_dir)
 
         np.save(file=save_dir + '/X_train.npy',
                 arr=raw.iloc[train_ind, 2:].values)

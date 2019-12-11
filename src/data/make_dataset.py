@@ -5,14 +5,11 @@
 # You are free to change the code as you like.
 
 import os
-import sys
 import urllib.request as url
-
 import pandas as pd
 
-sys.path.append("../..")
 
-RAW_DATA_DIR = '../data/raw/RawData.xlsx'
+RAW_DATA_DIR = os.path.abspath(os.path.join(os.path.realpath(__file__), "../../../data/raw"))
 
 INDEX_SHEET_NAME = ['HangSeng Index Data',
                     'S&P500 Index Data',
@@ -31,6 +28,7 @@ FUTURE_SHEET_NAME = ['HangSeng Index Future Data',
                      ]
 
 
+
 def download_data():
     """
     Download the Raw data xlsx from the website provided by the author.
@@ -38,10 +36,11 @@ def download_data():
     :return: None
     """
 
-    if not os.path.exists(RAW_DATA_DIR):
+    if not os.path.exists(RAW_DATA_DIR+'/RawData.xlsx'):
+        os.makedirs(RAW_DATA_DIR)
         print('Start downloading data...')
         url.urlretrieve(url=r"https://ndownloader.figshare.com/files/8493140",
-                        filename=RAW_DATA_DIR)
+                        filename=RAW_DATA_DIR+'/RawData.xlsx')
         print('Download complete.')
     else:
         print('Data already exists.')
@@ -54,10 +53,11 @@ def load_data(sheet_name="HangSeng Index Data"):
     :return: A data frame contains the data of certain index.
     """
     # If the data hasn't been downloaded yet, download it first.
-    if not os.path.exists(RAW_DATA_DIR):
+    if not os.path.exists(RAW_DATA_DIR+'/RawData.xlsx'):
         download_data()
 
-    return pd.read_excel(RAW_DATA_DIR, sheet_name="HangSeng Index Data")
+    return pd.read_excel(RAW_DATA_DIR+'/RawData.xlsx', sheet_name="HangSeng Index Data")
+
 
 
 if __name__ == '__main__':

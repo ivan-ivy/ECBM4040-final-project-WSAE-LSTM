@@ -81,8 +81,8 @@ class StackedAutoEncoder:
                 optimizer.apply_gradients(grads_and_vars=zip(grads, model.variables))
                 loss_lst.append(loss.numpy())
                 total_loss += loss.numpy()
-            if (epoch % 5 == 0):
-                print('{}/{} Average loss per epoch: {}'.format(epoch + 1, n_epochs, total_loss / n_batches))
+            # if (epoch % 5 == 0):
+                # print('{}/{} Average loss per epoch: {}'.format(epoch + 1, n_epochs, total_loss / n_batches))
         # plt.plot(loss_lst)
 
     def train_stacked_ae(self,
@@ -91,14 +91,14 @@ class StackedAutoEncoder:
                          n_epochs=20,
                          batch_size=128
                          ):
-        print(f"Start to train Layer 1.")
+        # print(f"Start to train Layer 1.")
         self.train_one_ae(self.ae[0], inputs, learning_rate, n_epochs, batch_size)
         h = inputs
         for i in range(1, len(self.ae)):
             h = self.ae[i - 1].encoder(h).numpy()
-            print(f"Start to train Layer {i + 1}.")
+            # print(f"Start to train Layer {i + 1}.")
             self.train_one_ae(self.ae[i], h, learning_rate, n_epochs, batch_size)
-            print(f">>>>Layer {i + 1} trained!<<<<")
+            # print(f">>>>Layer {i + 1} trained!<<<<")
 
     def encode(self, x_input):
         h = x_input

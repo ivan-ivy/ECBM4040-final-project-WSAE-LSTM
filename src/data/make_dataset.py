@@ -6,8 +6,8 @@
 
 import os
 import urllib.request as url
-import pandas as pd
 
+import pandas as pd
 
 RAW_DATA_DIR = os.path.abspath(os.path.join(os.path.realpath(__file__), "../../../data/raw"))
 

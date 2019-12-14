@@ -25,6 +25,10 @@ def min_max_scale(x, x_train):
 
 
 def generate_features(raw: pd.DataFrame, sheet_name):
+    if sheet_name=='Nifty 50 index Data':
+        raw.Ntime=raw.Date
+    if sheet_name=='CSI300 Index Data':
+        raw.insert(0,'Ntime',raw.Time)
     month_lst = list(set(raw.Ntime // 100))
     month_lst.sort()
 

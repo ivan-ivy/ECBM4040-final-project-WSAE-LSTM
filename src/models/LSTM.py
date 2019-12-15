@@ -8,6 +8,13 @@ def build_lstm_model(inputs_shape,
                      layers=5,
                      units=[64, 64, 64, 64, 64],
                      learning_rate=0.05):
+    """
+    Args:
+        inputs_shape: shape of inputs
+        layers: number of layers
+        units: a list of number of hidden units of each layer
+        learning_rate: learning rate
+    """
     model = tf.keras.Sequential()
 
     # ad layers using loop
@@ -38,6 +45,13 @@ def generate_slice_data(dataset,
                         target,
                         history_size,
                         target_size=0):
+    """
+    Args:
+        dataset: inputs data
+        target: label of data
+        history_size: time window of prediction
+        target_size: steps of prediction, default 0 for one-step-ahead prediction
+    """
     data = []
     labels = []
 
@@ -57,6 +71,17 @@ def generate_slice_data(dataset,
 def generate_train_val_data(x_train, y_train, x_val, y_val, x_test, y_test,
                             past_history, batch_size):
     # normalization
+    """
+    Args:
+        x_train: training set
+        y_train: training label
+        x_val: validation set
+        y_val: validation label
+        x_test: test set
+        y_test: test label
+        past_history: time window for prediction
+        batch_size: batch size
+    """
     data_mean = x_train.mean(axis=0)
     data_std = x_train.std(axis=0)
     x_train = (x_train - data_mean) / data_std

@@ -28,24 +28,33 @@ FEATURE_DIR = os.path.abspath(os.path.join(os.path.realpath(__file__), "../../..
 def min_max_scale(x, x_train):
     """
     Normalize the inputs data to range(0,1) for auto encoder.
-    :param x: inputs to conduct normalization
-    :param x_train: training data for min max calculation
+    :arg x: inputs to conduct normalization
+    :arg x_train: training data for min max calculation
     :return: normalized data
     """
-
     return (x - x_train.min(axis=0)) / (x_train.max(axis=0) - x_train.min(axis=0))
 
 
 def generate_features(raw: pd.DataFrame, sheet_name):
+    """
+    Generate normalizaed, denoised and encoded features using normalization, wavelet transform and stacked auto-
+    encoder.
+    :arg raw: data frame contains the data
+    :arg sheet_name: sheet name correspond to the raw args
+    :return: None
+    """
 
+    # treat with messy data
     if sheet_name == 'DJIA index Data':
         raw.WVAD = np.where(raw.WVAD < -1e8, -1e8, raw.WVAD)
 
     if sheet_name == 'Nifty 50 index Data':
         raw.Ntime = raw.Date
+
     if sheet_name == 'CSI300 Index Data':
         raw.insert(0, 'Ntime', raw.Time)
 
+    # use month to organize data slice
     month_lst = list(set(raw.Ntime // 100))
     month_lst.sort()
 
@@ -97,7 +106,6 @@ def generate_features(raw: pd.DataFrame, sheet_name):
         np.save(file=save_dir + '/Y_val.npy', arr=y_val_n)
         np.save(file=save_dir + '/X_test.npy', arr=x_test_n)
         np.save(file=save_dir + '/Y_test.npy', arr=y_test_n)
-        # print(">>>>Normalized Features saved! <<<<")
 
         # wavelet transformation
         x_train_nw = wavelet_transform(wavelet_transform(x_train_n))
@@ -115,7 +123,6 @@ def generate_features(raw: pd.DataFrame, sheet_name):
         np.save(file=save_dir + '/Y_val.npy', arr=y_val_n)
         np.save(file=save_dir + '/X_test.npy', arr=x_test_nw)
         np.save(file=save_dir + '/Y_test.npy', arr=y_test_n)
-        # print(">>>>Wavelet Features saved! <<<<")
 
         sae = StackedAutoEncoder(layers=4,
                                  original_dim=x_train_n.shape[1],
@@ -138,8 +145,8 @@ def generate_features(raw: pd.DataFrame, sheet_name):
         np.save(file=save_dir + '/Y_val.npy', arr=y_val_n)
         np.save(file=save_dir + '/X_test.npy', arr=x_test_ne)
         np.save(file=save_dir + '/Y_test.npy', arr=y_test_n)
-        # print(">>>>Stacked Auto Encoder Features saved! <<<<")
 
+        # train stacked autoencoder
         sae = StackedAutoEncoder(layers=4,
                                  original_dim=x_train_nw.shape[1],
                                  intermidiate_dim=10)
@@ -161,7 +168,6 @@ def generate_features(raw: pd.DataFrame, sheet_name):
         np.save(file=save_dir + '/Y_val.npy', arr=y_val_n)
         np.save(file=save_dir + '/X_test.npy', arr=x_test_nwe)
         np.save(file=save_dir + '/Y_test.npy', arr=y_test_n)
-        # print(">>>>Wavelet Stacked Auto Encoder Features saved! <<<<")
         print(f">>>>{month_lst[i + NUM_TRAIN + NUM_VAL]} finished!<<<<")
 
     print(">>>> Feature generation complete! <<<<")

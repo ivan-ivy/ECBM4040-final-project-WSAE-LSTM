@@ -25,9 +25,8 @@ INDEX_SHEET_NAME = ['HangSeng Index Data',
 
 
 def download_data():
-    """
-    Download the Raw data xlsx from the website provided by the author.
-    The data file will be store in the ../../data/raw folder.
+    """Download the Raw data xlsx from the website provided by the author. The
+    data file will be store in the ../../data/raw folder.
     :return: None
     """
 
@@ -42,10 +41,11 @@ def download_data():
 
 
 def load_data(sheet_name="HangSeng Index Data"):
-    """
-    load the data set of specific type.
-    :param sheet_name: Specify the data.
+    """load the data set of specific type. :param sheet_name: Specify the data.
     :return: A data frame contains the data of certain index.
+
+    Args:
+        sheet_name: specify the sheet name to load data
     """
     # If the data hasn't been downloaded yet, download it first.
     if not os.path.exists(RAW_DATA_DIR + '/RawData.xlsx'):

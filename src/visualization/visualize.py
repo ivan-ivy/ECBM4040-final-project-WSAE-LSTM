@@ -12,6 +12,10 @@ FILE_NAME = '_train_result.pickle'
 
 
 def get_pivot_table(index_name):
+    """
+    Args:
+        index_name: specify the target data
+    """
     result = dict()
     for model in MODEL_NAME:
         result[model] = dict()

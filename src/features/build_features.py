@@ -1,8 +1,8 @@
 import os
-
+import sys
 import numpy as np
 import pandas as pd
-
+sys.path.append("../")
 from src.models.stacked_auto_encoder import StackedAutoEncoder
 from src.models.wavelet import wavelet_transform
 
@@ -21,7 +21,11 @@ def min_max_scale(x, x_train):
     :param x_train: training data for min max calculation
     :return: normalized data
     """
-    return (x - x_train.min(axis=0)) / (x_train.max(axis=0) - x_train.min(axis=0))
+    try:
+        out = (x - x_train.min(axis=0)) / (x_train.max(axis=0) - x_train.min(axis=0))
+    except RuntimeWarning:
+        print(error)
+    return out
 
 
 def generate_features(raw: pd.DataFrame, sheet_name):
@@ -56,6 +60,9 @@ def generate_features(raw: pd.DataFrame, sheet_name):
             os.makedirs(save_dir)
 
         # save the second column 'closing price' as target for training LSTM and RNN
+
+        # scale
+        raw.WVAD = raw.WVAD/10000
 
         x_train = raw.iloc[train_ind, 2:].values.astype(np.float32)
         y_train = raw.iloc[train_ind, 2].values.astype(np.float32)
@@ -148,3 +155,8 @@ def generate_features(raw: pd.DataFrame, sheet_name):
         print(f">>>>{month_lst[i + NUM_TRAIN + NUM_VAL]} finished!<<<<")
 
     print(">>>> Feature generation complete! <<<<")
+
+
+if __name__ == "__main__":
+    raw = load_data(sheet_name='DJIA index Data')
+    generate_features(raw, sheet_name='DJIA index Data')

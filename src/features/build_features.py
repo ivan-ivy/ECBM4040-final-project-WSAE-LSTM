@@ -21,14 +21,15 @@ def min_max_scale(x, x_train):
     :param x_train: training data for min max calculation
     :return: normalized data
     """
-    try:
-        out = (x - x_train.min(axis=0)) / (x_train.max(axis=0) - x_train.min(axis=0))
-    except RuntimeWarning:
-        print(error)
-    return out
+
+        
+    return (x - x_train.min(axis=0)) / (x_train.max(axis=0) - x_train.min(axis=0))
 
 
 def generate_features(raw: pd.DataFrame, sheet_name):
+    if sheet_name == 'DJIA index Data':
+        raw.WVAD = np.where(raw.WVAD < -1e8, -1e8, raw.WVAD)
+
     if sheet_name=='Nifty 50 index Data':
         raw.Ntime=raw.Date
     if sheet_name=='CSI300 Index Data':
@@ -61,8 +62,6 @@ def generate_features(raw: pd.DataFrame, sheet_name):
 
         # save the second column 'closing price' as target for training LSTM and RNN
 
-        # scale
-        raw.WVAD = raw.WVAD/10000
 
         x_train = raw.iloc[train_ind, 2:].values.astype(np.float32)
         y_train = raw.iloc[train_ind, 2].values.astype(np.float32)
@@ -156,7 +155,3 @@ def generate_features(raw: pd.DataFrame, sheet_name):
 
     print(">>>> Feature generation complete! <<<<")
 
-
-if __name__ == "__main__":
-    raw = load_data(sheet_name='DJIA index Data')
-    generate_features(raw, sheet_name='DJIA index Data')

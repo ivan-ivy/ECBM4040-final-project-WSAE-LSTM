@@ -2,6 +2,7 @@ import logging
 import os
 import pickle
 import sys
+
 import numpy as np
 
 # set log level to ignore warning due to bugs of tensorflow 2.0
@@ -9,21 +10,24 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 logging.getLogger("tensorflow").setLevel(logging.CRITICAL)
 logging.getLogger("tensorflow_hub").setLevel(logging.CRITICAL)
 
-
 sys.path.append("../")
-from src.data.make_dataset import INDEX_SHEET_NAME
+from src.data.make_dataset import INDEX_SHEET_NAME, load_data
+from src.features.build_features import generate_features
 from src.models.LSTM import build_lstm_model, generate_train_val_data
 
 if __name__ == '__main__':
     result_dict = dict()
-    EPOCHS = 6000
+    EPOCHS = 5000
     past_history = 4
 
     for index in INDEX_SHEET_NAME:
         print(f"Start {index} part!")
         result_dict[index] = dict()
 
-        data_dir = f'../data/processed/wsae/{index}'
+        data_dir = f'../data/processed/sae/{index}'
+        if not os.path.exists(data_dir):
+            raw = load_data(sheet_name=index)
+            generate_features(raw, sheet_name=index)
         train_lst = os.listdir(data_dir)
         for name in train_lst:
             x_train = np.load(data_dir + f'/{name}/X_train.npy')
@@ -38,7 +42,7 @@ if __name__ == '__main__':
                 past_history=4, batch_size=60
             )
 
-            lstm = build_lstm_model(inputs_shape=[4, 10],
+            lstm = build_lstm_model(inputs_shape=[4, x_train.shape[1]],
                                     layers=5,
                                     units=[64, 64, 64, 64, 64],
                                     learning_rate=0.05)
@@ -55,12 +59,11 @@ if __name__ == '__main__':
             if not os.path.exists(save_dir):
                 os.makedirs(save_dir)
 
-            lstm.save(save_dir + '/wase-lstmt.h5')
+            lstm.save(save_dir + '/sae-lstmt.h5')
             print(f">>>>{index} {name} done!<<<<")
 
-        with open(f'{index}_train_result.pickle', 'wb') as handle:
-            pickle.dump(result_dict[index], handle, protocol=pickle.HIGHEST_PROTOCOL)
+        with open(f'/sae-lstm/{index}_train_result.pickle', 'wb') as handle:
+            pickle.dump(result_dict[index], handle, protocol = pickle.HIGHEST_PROTOCOL)
 
-    with open(f'train_result.pickle', 'wb') as handle:
+    with open(f'/sae-lstm/train_result.pickle', 'wb') as handle:
         pickle.dump(result_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
-

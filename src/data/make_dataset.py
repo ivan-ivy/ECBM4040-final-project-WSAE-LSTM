@@ -50,6 +50,8 @@ def load_data(sheet_name="HangSeng Index Data"):
     # If the data hasn't been downloaded yet, download it first.
     if not os.path.exists(RAW_DATA_DIR+'/RawData.xlsx'):
         download_data()
+
     return pd.read_excel(RAW_DATA_DIR+'/RawData.xlsx', sheet_name=sheet_name)
+
 
 

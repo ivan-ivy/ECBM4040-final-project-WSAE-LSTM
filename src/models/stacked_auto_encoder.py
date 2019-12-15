@@ -78,7 +78,6 @@ class AutoEncoder(tf.keras.Model):
                                l2_reg=l2_reg)
 
         self.decoder = Decoder(original_dim=original_dim,
-                               intermidiate_dim=intermidiate_dim,
                                l2_reg=l2_reg)
 
     def call(self, inputs):

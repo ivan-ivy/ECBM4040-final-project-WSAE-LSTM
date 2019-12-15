@@ -11,11 +11,12 @@ class MeanAbsolutePercentageError(tf.keras.metrics.Metric):
         self.mape = self.add_weight(name="mape", dtype=tf.float32, initializer=tf.zeros_initializer())
         self.count = self.add_weight(name='count', dtype=tf.int32, initializer=tf.zeros_initializer())
 
-    def update_state(self, y_true, y_pred):
+    def update_state(self, y_true, y_pred, sample_weight=None):
         """
         Args:
             y_true: ture label
             y_pred: predicted label
+            sample_weight:
         """
         y_true = tf.clip_by_value(y_true, clip_value_min=1e-3, clip_value_max=10)
         y_pred = tf.clip_by_value(y_pred, clip_value_min=1e-6, clip_value_max=10)
@@ -43,7 +44,7 @@ class TheilU(tf.keras.metrics.Metric):
         self.ms_true = self.add_weight(name="ms_true", dtype=tf.float32, initializer=tf.zeros_initializer())
         self.ms_pred = self.add_weight(name="ms_pred", dtype=tf.float32, initializer=tf.zeros_initializer())
 
-    def update_state(self, y_true, y_pred):
+    def update_state(self, y_true, y_pred, sample_weight=None):
         """
         Args:
             y_true: ture label
@@ -76,11 +77,12 @@ class LinearCorrelation(tf.keras.metrics.Metric):
         self.squre_pred = self.add_weight(name="squre_pred", dtype=tf.float32, initializer=tf.zeros_initializer())
         self.count = self.add_weight(name='count', dtype=tf.int32, initializer=tf.zeros_initializer())
 
-    def update_state(self, y_true, y_pred):
+    def update_state(self, y_true, y_pred, sample_weight=None):
         """
         Args:
             y_true: ture label
             y_pred: predicted label
+            sample_weight:
         """
         self.sum_prod.assign_add(tf.reduce_sum(tf.multiply(y_true, y_pred)))
         self.sum_true.assign_add(tf.reduce_sum(y_true))

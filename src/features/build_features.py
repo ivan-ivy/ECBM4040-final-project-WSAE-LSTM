@@ -21,10 +21,16 @@ def min_max_scale(x, x_train):
     :param x_train: training data for min max calculation
     :return: normalized data
     """
+
     return (x - x_train.min(axis=0)) / (x_train.max(axis=0) - x_train.min(axis=0))
 
 
 def generate_features(raw: pd.DataFrame, sheet_name):
+
+    # fix wrong data in original data
+    if sheet_name == 'DJIA index Data':
+        raw.WVAD = np.where(raw.WVAD < -1e8, -1e8, raw.WVAD)
+
     month_lst = list(set(raw.Ntime // 100))
     month_lst.sort()
 
@@ -144,3 +150,10 @@ def generate_features(raw: pd.DataFrame, sheet_name):
         print(f">>>>{month_lst[i + NUM_TRAIN + NUM_VAL]} finished!<<<<")
 
     print(">>>> Feature generation complete! <<<<")
+
+
+if __name__ == '__main__':
+    from src.data.make_dataset import load_data
+
+    raw = load_data(sheet_name='DJIA index Data')
+    generate_features(raw, sheet_name='DJIA index Data')

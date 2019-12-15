@@ -56,7 +56,7 @@ def load_data(sheet_name="HangSeng Index Data"):
     if not os.path.exists(RAW_DATA_DIR+'/RawData.xlsx'):
         download_data()
 
-    return pd.read_excel(RAW_DATA_DIR+'/RawData.xlsx', sheet_name="HangSeng Index Data")
+    return pd.read_excel(RAW_DATA_DIR+'/RawData.xlsx', sheet_name=sheet_name)
 
 
 

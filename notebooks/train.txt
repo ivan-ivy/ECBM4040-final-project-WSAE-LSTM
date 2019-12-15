@@ -1,0 +1,74 @@
+C:\Users\mrliu\AppData\Local\Continuum\anaconda3\envs\envTF20\python.exe C:/Users/mrliu/Google-drive/ECBM4040/ECBM4040-final-project-WSAE-LSTM/notebooks/train.py
+Start HangSeng Index Data part!
+
+1/1 [==============================] - 0s 13ms/step - loss: 0.0117 - mean_absolute_percentage_error: 10.0384 - mape: 0.1004 - r: 0.7389 - theil_u: 0.0555
+>>>>HangSeng Index Data 201010 done!<<<<
+
+1/1 [==============================] - 0s 15ms/step - loss: 0.0095 - mean_absolute_percentage_error: 8.4520 - mape: 0.0845 - r: 0.3340 - theil_u: 0.0491
+>>>>HangSeng Index Data 201101 done!<<<<
+
+1/1 [==============================] - 0s 13ms/step - loss: 8.9727e-04 - mean_absolute_percentage_error: 2.6829 - mape: 0.0268 - r: 0.8628 - theil_u: 0.0175
+>>>>HangSeng Index Data 201104 done!<<<<
+
+1/1 [==============================] - 0s 19ms/step - loss: 0.0075 - mean_absolute_percentage_error: 13.3489 - mape: 0.1335 - r: 0.8753 - theil_u: 0.0685
+>>>>HangSeng Index Data 201107 done!<<<<
+
+1/1 [==============================] - 0s 12ms/step - loss: 0.0987 - mean_absolute_percentage_error: 198.1587 - mape: 1.9816 - r: -0.0034 - theil_u: 0.4537
+>>>>HangSeng Index Data 201110 done!<<<<
+
+1/1 [==============================] - 0s 12ms/step - loss: 0.0050 - mean_absolute_percentage_error: 16.9447 - mape: 0.1694 - r: 0.8800 - theil_u: 0.0744
+>>>>HangSeng Index Data 201201 done!<<<<
+
+1/1 [==============================] - 0s 12ms/step - loss: 0.0015 - mean_absolute_percentage_error: 8.7366 - mape: 0.0874 - r: 0.9569 - theil_u: 0.0465
+>>>>HangSeng Index Data 201204 done!<<<<
+
+1/1 [==============================] - 0s 12ms/step - loss: 0.0030 - mean_absolute_percentage_error: 10.3533 - mape: 0.1035 - r: 0.8078 - theil_u: 0.0677
+>>>>HangSeng Index Data 201207 done!<<<<
+
+1/1 [==============================] - 0s 12ms/step - loss: 0.0014 - mean_absolute_percentage_error: 5.0872 - mape: 0.0509 - r: 0.9326 - theil_u: 0.0283
+>>>>HangSeng Index Data 201210 done!<<<<
+
+1/1 [==============================] - 0s 12ms/step - loss: 0.0012 - mean_absolute_percentage_error: 3.2637 - mape: 0.0326 - r: 0.8532 - theil_u: 0.0217
+>>>>HangSeng Index Data 201301 done!<<<<
+
+1/1 [==============================] - 0s 11ms/step - loss: 0.0029 - mean_absolute_percentage_error: 6.3105 - mape: 0.0631 - r: 0.9131 - theil_u: 0.0371
+>>>>HangSeng Index Data 201304 done!<<<<
+
+1/1 [==============================] - 0s 14ms/step - loss: 0.0036 - mean_absolute_percentage_error: 7.3556 - mape: 0.0736 - r: 0.9202 - theil_u: 0.0425
+>>>>HangSeng Index Data 201307 done!<<<<
+
+1/1 [==============================] - 0s 13ms/step - loss: 0.0024 - mean_absolute_percentage_error: 4.2457 - mape: 0.0425 - r: 0.5180 - theil_u: 0.0269
+>>>>HangSeng Index Data 201310 done!<<<<
+
+1/1 [==============================] - 0s 13ms/step - loss: 0.0011 - mean_absolute_percentage_error: 3.4153 - mape: 0.0342 - r: 0.8845 - theil_u: 0.0209
+>>>>HangSeng Index Data 201401 done!<<<<
+
+1/1 [==============================] - 0s 12ms/step - loss: 0.0018 - mean_absolute_percentage_error: 4.3015 - mape: 0.0430 - r: 0.8342 - theil_u: 0.0268
+>>>>HangSeng Index Data 201404 done!<<<<
+
+1/1 [==============================] - 0s 13ms/step - loss: 0.0289 - mean_absolute_percentage_error: 13.9513 - mape: 0.1395 - r: 0.7022 - theil_u: 0.0865
+>>>>HangSeng Index Data 201407 done!<<<<
+
+1/1 [==============================] - 0s 13ms/step - loss: 0.0303 - mean_absolute_percentage_error: 17.6852 - mape: 0.1769 - r: 0.5094 - theil_u: 0.1064
+>>>>HangSeng Index Data 201410 done!<<<<
+
+1/1 [==============================] - 0s 15ms/step - loss: 0.0282 - mean_absolute_percentage_error: 18.3391 - mape: 0.1834 - r: 0.5508 - theil_u: 0.1099
+>>>>HangSeng Index Data 201501 done!<<<<
+
+1/1 [==============================] - 0s 12ms/step - loss: 0.2592 - mean_absolute_percentage_error: 35.5879 - mape: 0.3559 - r: 0.1099 - theil_u: 0.2228
+>>>>HangSeng Index Data 201504 done!<<<<
+
+1/1 [==============================] - 0s 14ms/step - loss: 0.0193 - mean_absolute_percentage_error: 22.1911 - mape: 0.2219 - r: 0.9254 - theil_u: 0.1114
+>>>>HangSeng Index Data 201507 done!<<<<
+
+1/1 [==============================] - 0s 11ms/step - loss: 0.0035 - mean_absolute_percentage_error: 18.0197 - mape: 0.1802 - r: 0.7528 - theil_u: 0.1186
+>>>>HangSeng Index Data 201510 done!<<<<
+
+1/1 [==============================] - 0s 11ms/step - loss: 0.0494 - mean_absolute_percentage_error: 345.1622 - mape: 84.8129 - r: 0.7084 - theil_u: 0.9077
+>>>>HangSeng Index Data 201601 done!<<<<
+
+1/1 [==============================] - 0s 12ms/step - loss: 0.0294 - mean_absolute_percentage_error: 752.2142 - mape: 78.6201 - r: 0.6982 - theil_u: 0.7020
+>>>>HangSeng Index Data 201604 done!<<<<
+
+1/1 [==============================] - 0s 14ms/step - loss: 0.0026 - mean_absolute_percentage_error: 10.6705 - mape: 0.1067 - r: 0.9280 - theil_u: 0.0602
+>>>>HangSeng Index Data 201607 done!<<<<

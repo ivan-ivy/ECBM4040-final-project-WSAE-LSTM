@@ -7,13 +7,14 @@
 # import modules
 import os
 import urllib.request as url
+
 import pandas as pd
 
 # define absolute path, to make sure use this function in jupyter notebook will not 
 # casue a problem
 RAW_DATA_DIR = os.path.abspath(os.path.join(os.path.realpath(__file__), "../../../data/raw"))
 
-# for training convience
+# for training convenience
 INDEX_SHEET_NAME = ['HangSeng Index Data',
                     'S&P500 Index Data',
                     'CSI300 Index Data',
@@ -23,7 +24,6 @@ INDEX_SHEET_NAME = ['HangSeng Index Data',
                     ]
 
 
-
 def download_data():
     """
     Download the Raw data xlsx from the website provided by the author.
@@ -31,11 +31,11 @@ def download_data():
     :return: None
     """
 
-    if not os.path.exists(RAW_DATA_DIR+'/RawData.xlsx'):
+    if not os.path.exists(RAW_DATA_DIR + '/RawData.xlsx'):
         os.makedirs(RAW_DATA_DIR)
         print('Start downloading data...')
         url.urlretrieve(url=r"https://ndownloader.figshare.com/files/8493140",
-                        filename=RAW_DATA_DIR+'/RawData.xlsx')
+                        filename=RAW_DATA_DIR + '/RawData.xlsx')
         print('Download complete.')
     else:
         print('Data already exists.')
@@ -48,10 +48,7 @@ def load_data(sheet_name="HangSeng Index Data"):
     :return: A data frame contains the data of certain index.
     """
     # If the data hasn't been downloaded yet, download it first.
-    if not os.path.exists(RAW_DATA_DIR+'/RawData.xlsx'):
+    if not os.path.exists(RAW_DATA_DIR + '/RawData.xlsx'):
         download_data()
 
-    return pd.read_excel(RAW_DATA_DIR+'/RawData.xlsx', sheet_name=sheet_name)
-
-
-
+    return pd.read_excel(RAW_DATA_DIR + '/RawData.xlsx', sheet_name=sheet_name)

@@ -7,10 +7,11 @@
 # import modules
 import os
 import sys
+
 import numpy as np
 import pandas as pd
-sys.path.append("../")
 
+sys.path.append("../")
 
 from src.models.stacked_auto_encoder import StackedAutoEncoder
 from src.models.wavelet import wavelet_transform
@@ -40,10 +41,10 @@ def generate_features(raw: pd.DataFrame, sheet_name):
     if sheet_name == 'DJIA index Data':
         raw.WVAD = np.where(raw.WVAD < -1e8, -1e8, raw.WVAD)
 
-    if sheet_name=='Nifty 50 index Data':
-        raw.Ntime=raw.Date
-    if sheet_name=='CSI300 Index Data':
-        raw.insert(0,'Ntime',raw.Time)
+    if sheet_name == 'Nifty 50 index Data':
+        raw.Ntime = raw.Date
+    if sheet_name == 'CSI300 Index Data':
+        raw.insert(0, 'Ntime', raw.Time)
 
     month_lst = list(set(raw.Ntime // 100))
     month_lst.sort()
@@ -72,7 +73,6 @@ def generate_features(raw: pd.DataFrame, sheet_name):
             os.makedirs(save_dir)
 
         # save the second column 'closing price' as target for training LSTM and RNN
-
 
         x_train = raw.iloc[train_ind, 2:].values.astype(np.float32)
         y_train = raw.iloc[train_ind, 2].values.astype(np.float32)
@@ -165,5 +165,3 @@ def generate_features(raw: pd.DataFrame, sheet_name):
         print(f">>>>{month_lst[i + NUM_TRAIN + NUM_VAL]} finished!<<<<")
 
     print(">>>> Feature generation complete! <<<<")
-
-

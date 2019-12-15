@@ -16,5 +16,3 @@ def wavelet_transform(x, wavelet="haar", level=2, declevel=2):
     return y[-len(x):]
 
 
-def step_wise_wavelet_trasform(x, wavelet="haar", level=2, declevel=2):
-    pass

@@ -1,8 +1,17 @@
+# ECBM E4040 Final Project: WSAE-LSTM
+# Author: Yifan Liu
+# This is a utility function to help you download the dataset and preprocess the data we use for this homework.
+# requires several modules: _pickle, tarfile, glob. If you don't have them, search the web on how to install them.
+# You are free to change the code as you like.
+
+# import modules
 import os
 import sys
 import numpy as np
 import pandas as pd
 sys.path.append("../")
+
+
 from src.models.stacked_auto_encoder import StackedAutoEncoder
 from src.models.wavelet import wavelet_transform
 
@@ -11,6 +20,7 @@ NUM_TRAIN = 24
 NUM_VAL = 3
 NUM_TEST = 3
 
+# # define absolute path
 FEATURE_DIR = os.path.abspath(os.path.join(os.path.realpath(__file__), "../../../data"))
 
 
@@ -22,11 +32,11 @@ def min_max_scale(x, x_train):
     :return: normalized data
     """
 
-        
     return (x - x_train.min(axis=0)) / (x_train.max(axis=0) - x_train.min(axis=0))
 
 
 def generate_features(raw: pd.DataFrame, sheet_name):
+
     if sheet_name == 'DJIA index Data':
         raw.WVAD = np.where(raw.WVAD < -1e8, -1e8, raw.WVAD)
 

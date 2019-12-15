@@ -4,13 +4,16 @@
 # requires several modules: _pickle, tarfile, glob. If you don't have them, search the web on how to install them.
 # You are free to change the code as you like.
 
+# import modules
 import os
 import urllib.request as url
-
 import pandas as pd
 
+# define absolute path, to make sure use this function in jupyter notebook will not 
+# casue a problem
 RAW_DATA_DIR = os.path.abspath(os.path.join(os.path.realpath(__file__), "../../../data/raw"))
 
+# for training convience
 INDEX_SHEET_NAME = ['HangSeng Index Data',
                     'S&P500 Index Data',
                     'CSI300 Index Data',
@@ -18,14 +21,6 @@ INDEX_SHEET_NAME = ['HangSeng Index Data',
                     'Nikkei 225 index Data',
                     'Nifty 50 index Data'
                     ]
-
-FUTURE_SHEET_NAME = ['HangSeng Index Future Data',
-                     'S&P500 Index Future Data',
-                     'CSI300 Index Future Data',
-                     'DJIA index future data',
-                     'Nikkei 225 index future Data',
-                     'Nifty 50 index future Data'
-                     ]
 
 
 
@@ -55,11 +50,6 @@ def load_data(sheet_name="HangSeng Index Data"):
     # If the data hasn't been downloaded yet, download it first.
     if not os.path.exists(RAW_DATA_DIR+'/RawData.xlsx'):
         download_data()
-
     return pd.read_excel(RAW_DATA_DIR+'/RawData.xlsx', sheet_name=sheet_name)
 
 
-
-if __name__ == '__main__':
-    print(os.path.dirname(__file__))
-    download_data()

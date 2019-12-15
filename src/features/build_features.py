@@ -1,7 +1,16 @@
-import os
+# ECBM E4040 Final Project: WSAE-LSTM
+# Author: Yifan Liu
+# This is a utility function to help you download the dataset and preprocess the data we use for this homework.
+# requires several modules: _pickle, tarfile, glob. If you don't have them, search the web on how to install them.
+# You are free to change the code as you like.
 
+# import modules
+import os
+import sys
 import numpy as np
 import pandas as pd
+sys.path.append("../")
+
 
 from src.models.stacked_auto_encoder import StackedAutoEncoder
 from src.models.wavelet import wavelet_transform
@@ -11,6 +20,7 @@ NUM_TRAIN = 24
 NUM_VAL = 3
 NUM_TEST = 3
 
+# # define absolute path
 FEATURE_DIR = os.path.abspath(os.path.join(os.path.realpath(__file__), "../../../data"))
 
 
@@ -27,9 +37,13 @@ def min_max_scale(x, x_train):
 
 def generate_features(raw: pd.DataFrame, sheet_name):
 
-    # fix wrong data in original data
     if sheet_name == 'DJIA index Data':
         raw.WVAD = np.where(raw.WVAD < -1e8, -1e8, raw.WVAD)
+
+    if sheet_name=='Nifty 50 index Data':
+        raw.Ntime=raw.Date
+    if sheet_name=='CSI300 Index Data':
+        raw.insert(0,'Ntime',raw.Time)
 
     month_lst = list(set(raw.Ntime // 100))
     month_lst.sort()
@@ -58,6 +72,7 @@ def generate_features(raw: pd.DataFrame, sheet_name):
             os.makedirs(save_dir)
 
         # save the second column 'closing price' as target for training LSTM and RNN
+
 
         x_train = raw.iloc[train_ind, 2:].values.astype(np.float32)
         y_train = raw.iloc[train_ind, 2].values.astype(np.float32)
@@ -152,8 +167,3 @@ def generate_features(raw: pd.DataFrame, sheet_name):
     print(">>>> Feature generation complete! <<<<")
 
 
-if __name__ == '__main__':
-    from src.data.make_dataset import load_data
-
-    raw = load_data(sheet_name='DJIA index Data')
-    generate_features(raw, sheet_name='DJIA index Data')
